@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, render_template, request
 
+from difficulty import get_clues_for_difficulty
 from sudoku_logic import compare_boards, generate_puzzle
 
 app = Flask(__name__)
@@ -18,11 +19,16 @@ def index() -> str:
 @app.route('/new')
 def new_game() -> tuple:
     """Create a puzzle and store its solution for the current game."""
-    clues = int(request.args.get('clues', 35))
+    difficulty = request.args.get('difficulty', 'medium')
+    try:
+        clues = get_clues_for_difficulty(difficulty)
+    except ValueError as error:
+        return jsonify({'error': str(error)}), 400
+
     puzzle, solution = generate_puzzle(clues)
     CURRENT['puzzle'] = puzzle
     CURRENT['solution'] = solution
-    return jsonify({'puzzle': puzzle})
+    return jsonify({'puzzle': puzzle, 'difficulty': difficulty})
 
 @app.route('/check', methods=['POST'])
 def check_solution() -> tuple:
