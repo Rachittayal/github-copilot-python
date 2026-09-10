@@ -5,6 +5,8 @@
 }
 
 body {
+    --cell-background: #fafafa;
+    --box-alternate-background: #e8f0f7;
     font-family: Arial, sans-serif;
     background: #f4f4f4;
     text-align: center;
@@ -40,7 +42,7 @@ h1 {
     text-align: center;
     font-size: 20px;
     outline: none;
-    background: #fafafa;
+    background-color: var(--cell-background);
     transition: background 0.2s;
 }
 
@@ -64,7 +66,7 @@ h1 {
 .sudoku-row:nth-child(n+4):nth-child(-n+6) .sudoku-cell:nth-child(n+4):nth-child(-n+6),
 .sudoku-row:nth-child(n+7) .sudoku-cell:nth-child(-n+3),
 .sudoku-row:nth-child(n+7) .sudoku-cell:nth-child(n+7) {
-    background: #e8f0f7;
+    background-color: var(--box-alternate-background);
 }
 
 .sudoku-cell:nth-child(3),
@@ -124,6 +126,8 @@ button:hover {
 /* Keep the saved dark theme readable across the page and game board. */
 html.dark-mode-preload body,
 body.dark-mode {
+    --cell-background: #1e293b;
+    --box-alternate-background: #334155;
     background: #121820;
     color: #f1f5f9;
 }
@@ -140,7 +144,7 @@ body.dark-mode #sudoku-board {
 
 body.dark-mode .sudoku-cell {
     border-color: #64748b;
-    background: #1e293b;
+    background-color: var(--cell-background);
     color: #f8fafc;
 }
 
@@ -163,7 +167,7 @@ body.dark-mode .sudoku-row:nth-child(-n+3) .sudoku-cell:nth-child(n+7),
 body.dark-mode .sudoku-row:nth-child(n+4):nth-child(-n+6) .sudoku-cell:nth-child(n+4):nth-child(-n+6),
 body.dark-mode .sudoku-row:nth-child(n+7) .sudoku-cell:nth-child(-n+3),
 body.dark-mode .sudoku-row:nth-child(n+7) .sudoku-cell:nth-child(n+7) {
-    background: #334155;
+    background-color: var(--box-alternate-background);
 }
 
 /* Highlight assisted cells without confusing them with clues or errors. */
