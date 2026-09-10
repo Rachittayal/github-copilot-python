@@ -58,3 +58,15 @@ Use GitHub Copilot to refactor the code for this game to add more advanced featu
 - The game should be responsive and work well on both desktop and mobile devices.
 - UI colors should be visually appealing and accessible.
 - Completed and correct puzzles should display a congratulatory message with the time taken and hints used and ask for the user's name for Top 10 times.
+
+## Running Tests
+
+This project uses `pytest` for backend testing.
+
+From the `starter` directory, with your virtual environment activated:
+
+    pytest
+
+All tests should pass before any code changes are made. If you see
+`ModuleNotFoundError: No module named 'app'`, ensure a `conftest.py` (or
+`pytest.ini`) exists at the `starter/` root to add it to the Python path.
