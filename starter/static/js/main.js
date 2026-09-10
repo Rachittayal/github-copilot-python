@@ -15,6 +15,7 @@ let gameSolved = false;
 /** Display an error returned by the backend in the game message element. */
 function displayError(message) {
   const messageElement = document.getElementById('message');
+  messageElement.classList.remove('success');
   messageElement.style.color = '#d32f2f';
   messageElement.innerText = message;
 }
@@ -60,7 +61,8 @@ async function checkSolution() {
   if (incorrectCount === 0) {
     const elapsedSeconds = getElapsedSeconds();
     stopTimer();
-    messageElement.style.color = '#388e3c';
+    messageElement.style.color = '';
+    messageElement.classList.add('success');
     messageElement.innerText = `Congratulations! You solved it in ${formatTime(elapsedSeconds)} with ${getHintsUsed()} hint(s).`;
     if (!gameSolved) {
       gameSolved = true;
@@ -75,6 +77,7 @@ async function checkSolution() {
       renderLeaderboard();
     }
   } else {
+    messageElement.classList.remove('success');
     messageElement.style.color = '#d32f2f';
     messageElement.innerText = 'Some cells are incorrect.';
   }

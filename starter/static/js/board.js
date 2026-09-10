@@ -15,6 +15,7 @@ export function createBoardElement() {
       input.className = 'sudoku-cell';
       input.dataset.row = row;
       input.dataset.col = col;
+      input.setAttribute('aria-label', `Row ${row + 1}, column ${col + 1}`);
       input.addEventListener('input', (event) => {
         const value = event.target.value.replace(/[^1-9]/g, '');
         event.target.value = value;

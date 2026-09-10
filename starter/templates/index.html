@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sudoku Game</title>
   <script>
     if (localStorage.getItem('dark-mode') === 'enabled') {
@@ -13,22 +14,22 @@
 <body>
   <h1>Sudoku Game</h1>
   <label for="difficulty-select">Difficulty:</label>
-  <select id="difficulty-select" name="difficulty">
+  <select id="difficulty-select" name="difficulty" aria-label="Select Sudoku difficulty">
     <option value="easy">Easy</option>
     <option value="medium" selected>Medium</option>
     <option value="hard">Hard</option>
   </select>
 
-  <div id="sudoku-board"></div>
+  <div id="sudoku-board" role="grid" aria-label="Sudoku puzzle board"></div>
   <div class="controls">
-    <button id="new-game">New Game</button>
-    <button id="check-solution">Check Solution</button>
-    <button id="hint-button" type="button">Hint</button>
-    <button id="dark-mode-toggle" type="button">Dark Mode</button>
+    <button id="new-game" type="button" aria-label="Start a new Sudoku game">New Game</button>
+    <button id="check-solution" type="button" aria-label="Check the Sudoku solution">Check Solution</button>
+    <button id="hint-button" type="button" aria-label="Show a Sudoku hint">Hint</button>
+    <button id="dark-mode-toggle" type="button" aria-label="Toggle dark mode">Dark Mode</button>
     <span id="message"></span>
   </div>
   <div class="game-status">
-    <div id="timer-display">00:00</div>
+    <div id="timer-display" aria-live="polite" aria-label="Elapsed time">00:00</div>
     <div id="leaderboard" aria-label="Top 10 leaderboard">
       <h2>Top 10 Leaderboard</h2>
     </div>
