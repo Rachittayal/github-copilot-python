@@ -59,6 +59,18 @@ export function getCurrentBoard() {
   return board;
 }
 
+/** Fill and lock a hinted cell with its correct value. */
+export function applyHint(row, col, value) {
+  const inputs = document.getElementById('sudoku-board').getElementsByTagName('input');
+  const input = inputs[row * SIZE + col];
+  if (!input) return false;
+
+  input.value = value;
+  input.disabled = true;
+  input.className = 'sudoku-cell hint';
+  return true;
+}
+
 /** Display incorrect editable cells and the corresponding result message. */
 export function displayValidationResults(incorrectCells) {
   const inputs = document.getElementById('sudoku-board').getElementsByTagName('input');

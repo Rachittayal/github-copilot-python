@@ -40,5 +40,30 @@ def check_solution() -> tuple:
         return jsonify({'error': 'No game in progress'}), 400
     return jsonify({'incorrect': compare_boards(board, solution)})
 
+
+@app.route('/hint', methods=['POST'])
+def get_hint() -> tuple:
+    """Return the correct value for the first empty cell on the current board."""
+    solution = CURRENT.get('solution')
+    puzzle = CURRENT.get('puzzle')
+    if solution is None or puzzle is None:
+        return jsonify({'error': 'No game in progress'}), 400
+
+    data = request.get_json(silent=True) or {}
+    board = data.get('board', puzzle)
+
+    # Use the submitted board when available so solved-state detection is current.
+    empty_cells = [
+        (row, col)
+        for row in range(len(solution))
+        for col in range(len(solution[row]))
+        if board[row][col] == 0
+    ]
+    if not empty_cells:
+        return jsonify({'error': 'Puzzle is already solved'}), 400
+
+    row, col = empty_cells[0]
+    return jsonify({'row': row, 'col': col, 'value': solution[row][col]})
+
 if __name__ == '__main__':
     app.run(debug=True)

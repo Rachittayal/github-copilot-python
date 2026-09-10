@@ -138,6 +138,18 @@ body.dark-mode .sudoku-row:nth-child(n+7) .sudoku-cell:nth-child(n+7) {
     background: #334155;
 }
 
+/* Highlight assisted cells without confusing them with clues or errors. */
+.sudoku-cell.hint {
+    background: #fff3b0 !important;
+    color: #5b4300;
+    font-weight: bold;
+}
+
+body.dark-mode .sudoku-cell.hint {
+    background: #a16207 !important;
+    color: #fffbea;
+}
+
 body.dark-mode button {
     background: #2563eb;
     color: #ffffff;

@@ -1,9 +1,11 @@
-import {fetchCheckSolution, fetchNewGame} from './api.js';
+import {fetchCheckSolution, fetchHint, fetchNewGame} from './api.js';
 import {
   displayValidationResults,
   getCurrentBoard,
+  applyHint,
   renderPuzzle
 } from './board.js';
+import {recordHint, resetHints} from './hint.js';
 import {startTimer, stopTimer} from './timer.js';
 
 /** Display an error returned by the backend in the game message element. */
@@ -23,7 +25,22 @@ async function newGame() {
   }
   renderPuzzle(data.puzzle);
   document.getElementById('message').innerText = '';
+  resetHints();
   startTimer();
+}
+
+/** Request one hint, apply it to the board, and record its use. */
+async function requestHint() {
+  const data = await fetchHint(getCurrentBoard());
+  if (data.error) {
+    displayError(data.error);
+    return;
+  }
+
+  if (applyHint(data.row, data.col, data.value)) {
+    recordHint();
+    document.getElementById('message').innerText = 'Hint applied.';
+  }
 }
 
 /** Check the current board and display incorrect cells or a success message. */
@@ -64,6 +81,7 @@ window.addEventListener('load', () => {
   applySavedDarkMode();
   document.getElementById('new-game').addEventListener('click', newGame);
   document.getElementById('check-solution').addEventListener('click', checkSolution);
+  document.getElementById('hint-button').addEventListener('click', requestHint);
   document.getElementById('dark-mode-toggle').addEventListener('click', toggleDarkMode);
   newGame();
 });
