@@ -6,7 +6,11 @@ import {
   renderPuzzle
 } from './board.js';
 import {recordHint, resetHints} from './hint.js';
-import {startTimer, stopTimer} from './timer.js';
+import {getHintsUsed} from './hint.js';
+import {getElapsedSeconds, startTimer, stopTimer} from './timer.js';
+import {renderLeaderboard, saveScore} from './leaderboard.js';
+
+let gameSolved = false;
 
 /** Display an error returned by the backend in the game message element. */
 function displayError(message) {
@@ -26,6 +30,7 @@ async function newGame() {
   renderPuzzle(data.puzzle);
   document.getElementById('message').innerText = '';
   resetHints();
+  gameSolved = false;
   startTimer();
 }
 
@@ -53,13 +58,33 @@ async function checkSolution() {
   }
   const incorrectCount = displayValidationResults(data.incorrect);
   if (incorrectCount === 0) {
+    const elapsedSeconds = getElapsedSeconds();
     stopTimer();
     messageElement.style.color = '#388e3c';
-    messageElement.innerText = 'Congratulations! You solved it!';
+    messageElement.innerText = `Congratulations! You solved it in ${formatTime(elapsedSeconds)} with ${getHintsUsed()} hint(s).`;
+    if (!gameSolved) {
+      gameSolved = true;
+      const name = window.prompt('Enter your name for the leaderboard:') || 'Anonymous';
+      saveScore({
+        name: name.trim() || 'Anonymous',
+        time: elapsedSeconds,
+        difficulty: document.getElementById('difficulty-select').value,
+        hints: getHintsUsed(),
+        date: new Date().toISOString()
+      });
+      renderLeaderboard();
+    }
   } else {
     messageElement.style.color = '#d32f2f';
     messageElement.innerText = 'Some cells are incorrect.';
   }
+}
+
+/** Format elapsed seconds for the solved-game congratulatory message. */
+function formatTime(seconds) {
+  const minutes = Math.floor(seconds / 60).toString().padStart(2, '0');
+  const remainingSeconds = (seconds % 60).toString().padStart(2, '0');
+  return `${minutes}:${remainingSeconds}`;
 }
 
 /** Apply the saved theme preference to the page without a light-mode flash. */
@@ -79,6 +104,7 @@ function toggleDarkMode() {
 /** Wire controls and initialize the first Sudoku puzzle after page load. */
 window.addEventListener('load', () => {
   applySavedDarkMode();
+  renderLeaderboard();
   document.getElementById('new-game').addEventListener('click', newGame);
   document.getElementById('check-solution').addEventListener('click', checkSolution);
   document.getElementById('hint-button').addEventListener('click', requestHint);

@@ -168,3 +168,47 @@ body.dark-mode select {
 body.dark-mode #message {
     color: #fecaca;
 }
+
+#leaderboard {
+    margin: 24px auto;
+    max-width: 640px;
+    color: #333;
+}
+
+#leaderboard h2 {
+    margin-bottom: 12px;
+}
+
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    text-align: left;
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+    border: 1px solid #c5cbd3;
+    padding: 8px 10px;
+}
+
+.leaderboard-table th {
+    background: #e8f0f7;
+}
+
+body.dark-mode #leaderboard {
+    color: #f1f5f9;
+}
+
+body.dark-mode .leaderboard-table {
+    background: #1e293b;
+}
+
+body.dark-mode .leaderboard-table th,
+body.dark-mode .leaderboard-table td {
+    border-color: #64748b;
+}
+
+body.dark-mode .leaderboard-table th {
+    background: #334155;
+}
