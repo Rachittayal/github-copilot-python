@@ -48,6 +48,15 @@ h1 {
     background: #ffcdd2;
 }
 
+/* Alternate the background of the 3x3 boxes for easier scanning. */
+.sudoku-row:nth-child(-n+3) .sudoku-cell:nth-child(-n+3),
+.sudoku-row:nth-child(-n+3) .sudoku-cell:nth-child(n+7),
+.sudoku-row:nth-child(n+4):nth-child(-n+6) .sudoku-cell:nth-child(n+4):nth-child(-n+6),
+.sudoku-row:nth-child(n+7) .sudoku-cell:nth-child(-n+3),
+.sudoku-row:nth-child(n+7) .sudoku-cell:nth-child(n+7) {
+    background: #e8f0f7;
+}
+
 .sudoku-cell:nth-child(3),
 .sudoku-cell:nth-child(6) {
     border-right: 3px solid #333;
@@ -82,4 +91,68 @@ button:hover {
     margin-left: 20px;
     font-size: 16px;
     color: #d32f2f;
+}
+
+/* Keep the saved dark theme readable across the page and game board. */
+html.dark-mode-preload body,
+body.dark-mode {
+    background: #121820;
+    color: #f1f5f9;
+}
+
+body.dark-mode h1 {
+    color: #f8fafc;
+}
+
+body.dark-mode #sudoku-board {
+    border-color: #cbd5e1;
+    background: #1e293b;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+body.dark-mode .sudoku-cell {
+    border-color: #64748b;
+    background: #1e293b;
+    color: #f8fafc;
+}
+
+body.dark-mode .sudoku-cell:focus {
+    background: #164e63;
+}
+
+body.dark-mode .sudoku-cell.prefilled {
+    background: #475569;
+    color: #ffffff;
+}
+
+body.dark-mode .sudoku-cell.incorrect {
+    background: #7f1d1d;
+    color: #ffffff;
+}
+
+body.dark-mode .sudoku-row:nth-child(-n+3) .sudoku-cell:nth-child(-n+3),
+body.dark-mode .sudoku-row:nth-child(-n+3) .sudoku-cell:nth-child(n+7),
+body.dark-mode .sudoku-row:nth-child(n+4):nth-child(-n+6) .sudoku-cell:nth-child(n+4):nth-child(-n+6),
+body.dark-mode .sudoku-row:nth-child(n+7) .sudoku-cell:nth-child(-n+3),
+body.dark-mode .sudoku-row:nth-child(n+7) .sudoku-cell:nth-child(n+7) {
+    background: #334155;
+}
+
+body.dark-mode button {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+body.dark-mode button:hover {
+    background: #3b82f6;
+}
+
+body.dark-mode select {
+    background: #1e293b;
+    border: 1px solid #94a3b8;
+    color: #f8fafc;
+}
+
+body.dark-mode #message {
+    color: #fecaca;
 }

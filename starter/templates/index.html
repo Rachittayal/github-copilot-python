@@ -3,6 +3,11 @@
 <head>
   <meta charset="utf-8">
   <title>Sudoku Game</title>
+  <script>
+    if (localStorage.getItem('dark-mode') === 'enabled') {
+      document.documentElement.classList.add('dark-mode-preload');
+    }
+  </script>
   <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
@@ -23,7 +28,7 @@
     <span id="message"></span>
   </div>
   <div class="game-status">
-    <div id="timer-display">Time: 00:00</div>
+    <div id="timer-display">00:00</div>
     <div id="leaderboard" aria-label="Top 10 leaderboard">
       <h2>Top 10 Leaderboard</h2>
     </div>
