@@ -51,13 +51,13 @@ h1 {
 }
 
 .sudoku-cell.prefilled {
-    background: #e0e0e0;
+    background: #e0e0e0 !important;
     font-weight: bold;
     color: #333;
 }
 
 .sudoku-cell.incorrect {
-    background: #ffcdd2;
+    background: #ffcdd2 !important;
 }
 
 /* Alternate the background of the 3x3 boxes for easier scanning. */
@@ -153,12 +153,12 @@ body.dark-mode .sudoku-cell:focus {
 }
 
 body.dark-mode .sudoku-cell.prefilled {
-    background: #475569;
+    background: #475569 !important;
     color: #ffffff;
 }
 
 body.dark-mode .sudoku-cell.incorrect {
-    background: #7f1d1d;
+    background: #7f1d1d !important;
     color: #ffffff;
 }
 
