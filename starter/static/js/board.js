@@ -1,6 +1,46 @@
 /** Number of rows and columns in a Sudoku board. */
 export const SIZE = 9;
 
+/** Mark every non-empty cell that duplicates a value in its row, column, or box. */
+function updateConflictClasses() {
+  const inputs = document.getElementById('sudoku-board').getElementsByTagName('input');
+  const board = getCurrentBoard();
+  const conflicts = new Set();
+
+  for (let row = 0; row < SIZE; row++) {
+    for (let col = 0; col < SIZE; col++) {
+      const value = board[row][col];
+      if (!value) continue;
+
+      for (let index = 0; index < SIZE; index++) {
+        if (index !== col && board[row][index] === value) {
+          conflicts.add(row * SIZE + col);
+          conflicts.add(row * SIZE + index);
+        }
+        if (index !== row && board[index][col] === value) {
+          conflicts.add(row * SIZE + col);
+          conflicts.add(index * SIZE + col);
+        }
+      }
+
+      const startRow = row - (row % 3);
+      const startCol = col - (col % 3);
+      for (let boxRow = startRow; boxRow < startRow + 3; boxRow++) {
+        for (let boxCol = startCol; boxCol < startCol + 3; boxCol++) {
+          if ((boxRow !== row || boxCol !== col) && board[boxRow][boxCol] === value) {
+            conflicts.add(row * SIZE + col);
+            conflicts.add(boxRow * SIZE + boxCol);
+          }
+        }
+      }
+    }
+  }
+
+  for (let index = 0; index < inputs.length; index++) {
+    inputs[index].classList.toggle('conflict', conflicts.has(index));
+  }
+}
+
 /** Create the editable Sudoku grid and attach input sanitization. */
 export function createBoardElement() {
   const boardDiv = document.getElementById('sudoku-board');
@@ -19,6 +59,7 @@ export function createBoardElement() {
       input.addEventListener('input', (event) => {
         const value = event.target.value.replace(/[^1-9]/g, '');
         event.target.value = value;
+        updateConflictClasses();
       });
       rowDiv.appendChild(input);
     }
@@ -69,6 +110,7 @@ export function applyHint(row, col, value) {
   input.value = value;
   input.disabled = true;
   input.className = 'sudoku-cell hint';
+  updateConflictClasses();
   return true;
 }
 
@@ -84,5 +126,6 @@ export function displayValidationResults(incorrectCells) {
       input.className = 'sudoku-cell incorrect';
     }
   }
+  updateConflictClasses();
   return incorrect.size;
 }
