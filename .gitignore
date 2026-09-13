@@ -4,3 +4,6 @@ Thumbs.db
 
 # Ignore Python virtual environment
 .venv/
+
+temp_check/
+*.zip
