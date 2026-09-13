@@ -7,3 +7,7 @@ Thumbs.db
 
 temp_check/
 *.zip
+__pycache__/
+*.pyc
+.venv*/
+.pytest_cache/
