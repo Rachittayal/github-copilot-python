@@ -40,24 +40,19 @@ pip install -r requirements.txt
 python app.py
 ```
 
-7. Open http://127.0.0.1:5000 in your browser.
+7. 7. Open http://127.0.0.1:5000 in your browser.
+
+> ⚠️ **Important:** This app must be run through the Flask server — do NOT
+> open `starter/templates/index.html` directly in a browser (e.g., by
+> double-clicking the file or using a `file://` URL). The frontend uses
+> JavaScript ES modules (`<script type="module">`), which browsers block
+> for security reasons when loaded outside of a real web server. If any
+> buttons (New Game, Check Solution, Hint, Dark Mode) appear unresponsive,
+> confirm the app was accessed via **http://127.0.0.1:5000** (started with
+> `python app.py`) and check the browser console (F12 → Console tab) for
+> any errors.
 
 ## Project Instructions
-
-Use GitHub Copilot to refactor the code for this game to add more advanced features. The goal is to create a more modern and maintainable codebase and add additional functionality to the final product. You can use any combination of code completion and chat features, like Ask, Edit, or Agent modes.
-
-- Errors should be handled gracefully with appropriate messages to the user.
-- Implement a Sudoku board generator that creates a valid Sudoku puzzle with a unique solution.
-- Add a timer to track how long it takes to solve the puzzle.
-- Implement a solution checker that verifies if the user's solution is correct using event delegation.
-- Add a difficulty selector to allow users to choose between easy, medium, and hard puzzles.
-- Add a hint feature that provides clues for the user that are noted with unique colors.
-- Add a check puzzle button that checks the current state of the board against the solution.
-- User should get immediate feedback on their input, such as highlighting invalid entries.
-- Top 10 scores should be saved in local storage and displayed on the page with the user's name, time taken, hints used, and difficulty level.
-- The game should be responsive and work well on both desktop and mobile devices.
-- UI colors should be visually appealing and accessible.
-- Completed and correct puzzles should display a congratulatory message with the time taken and hints used and ask for the user's name for Top 10 times.
 
 ## Running Tests
 
