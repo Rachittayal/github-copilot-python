@@ -30,3 +30,20 @@ def compare_boards(
             if submitted[row][col] != solution[row][col]:
                 incorrect.append([row, col])
     return incorrect
+
+
+# Copilot's initial suggestion for this function used a nested for-loop
+# with hardcoded range(9) values and no type hints, e.g.:
+#   def count_filled_cells(board):
+#       count = 0
+#       for row in range(9):
+#           for col in range(9):
+#               if board[row][col] != 0:
+#                   count += 1
+#       return count
+# I rejected that version because it didn't match this file's existing
+# style (is_safe/compare_boards use the SIZE constant and full type hints)
+# and rewrote it manually as a concise generator expression instead.
+def count_filled_cells(board: List[List[int]]) -> int:
+    """Return the number of non-zero cells in ``board``."""
+    return sum(cell != 0 for row in board for cell in row)

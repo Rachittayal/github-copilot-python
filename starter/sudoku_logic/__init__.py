@@ -10,12 +10,13 @@ from .generator import (
     remove_cells,
 )
 from .solver import count_solutions, has_unique_solution
-from .validator import compare_boards, is_safe
+from .validator import compare_boards, count_filled_cells, is_safe
 
 __all__ = [
     'EMPTY',
     'SIZE',
     'compare_boards',
+    'count_filled_cells',
     'count_solutions',
     'create_empty_board',
     'deep_copy',
